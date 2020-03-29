@@ -1,54 +1,73 @@
 <html>
 	<head>
 		<title>AirAsia</title>
-	
         <link rel="stylesheet" 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <link 		rel="stylesheet" href="styles.css" > 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 		
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		
+		<h1>Gift Cards</h1>
 <!-- Navbar -->
-      
 	<nav class="navbar navbar-default">
 		  <div class="container">
 			<div class="collapse navbar-collapse" id="myNavbar">
 			  <ul class="nav navbar-nav navbar-right">
-          <li><a href="./card-add.php">Add New Card</a></li>
-          <li><a href="./card-list.php">Gift Cards</a></li>
+				<li><a href="./card-add.php">Add New Card</a></li>
+				<li><a href="./card-list.php">Gift Cards</a></li>
 			  </ul>
 			</div>
 		  </div>
-    </nav>
-    
-    <?php
-    require_once  '../model/db_connect.php';
-
-     //connect to db
-      $conn = new mysqli($hn, $un, $pw, $db);
-      if($conn->connect_error) die($conn->connect_error);
-
-    	echo <<<_END
-        <table>
-          <tr>
-            <td><a href="./card-details.php"><img src="/AirAsia/images/giftcard1.jpeg"><br>Card1<br>25</a></td>
-            <td><a href="./card-details.php"><img src="/AirAsia/images/giftcard1.jpeg"><br>Card2<br>50</a></td> 
-            <td><a href="./card-details.php"><img src="/AirAsia/images/giftcard1.jpeg"><br>Card3<br>75</a></td>
-          </tr>
-          <tr>
-            <td><a href="./card-details.php"><img src="/AirAsia/images/giftcard1.jpeg"><br>Card4<br>100</a></td>
-            <td><a href="./card-details.php"><img src="/AirAsia/images/giftcard1.jpeg"><br>Card5<br>125</a></td>
-            <td><a href="./card-details.php"><img src="/AirAsia/images/giftcard1.jpeg"><br>Card6<br>150</a></td>
-          </tr>
-          <tr>
-            <td><a href="./card-details.php"><img src="/AirAsia/images/giftcard1.jpeg"><br>Card7<br>175</a></td>
-            <td><a href="./card-details.php"><img src="/AirAsia/images/giftcard1.jpeg"><br>Card8<br>200</a></td>
-            <td><a href="./card-details.php"><img src="/AirAsia/images/giftcard1.jpeg"><br>Card9<br>225</a></td>
-          </tr>
-        </table>  
-    _END;  
-    $conn->close();
-		?>
-  
+		</nav>
 	</body>
 </html>
+
+<?php
+
+//reference login.php info
+require_once '../model/db_connect.php';
+
+//connect
+$conn = new mysqli ($hn, $un, $pw, $db);
+if ($conn->connect_error) die ($conn->connect_error);
+
+    $query = "SELECT * from giftcard";
+
+    $result = $conn->query($query);
+    if(!$result) die($conn->error);
+
+    $rows = $result->num_rows;
+
+    for ($j=0; $j<$rows; ++$j){
+        
+        $result->data_seek($j);
+        $row = $result->fetch_array(MYSQLI_NUM);
+    
+        
+                
+        echo <<<_END
+
+            <table>
+                <tr>
+                    <td>
+                    <img src="/AirAsia/images/giftcard1.jpeg">
+                    <pre>
+                    ID: $row[0]
+                    Card Name:<a href='card-details.php?id=$row[0]'>$row[1]</a>
+                    Card Type:$row[2]
+                    Card Value:$row[3]
+                    Points:$row[4]
+                    </pre>
+
+                    <form action='./card-delete.php' method='post'>
+                        <input type='hidden' name='delete' value='yes'>
+                        <input type='hidden' name='cardId' value='$row[0]'>
+                        <input type='submit' value='Delete Card'>
+                    </form>
+                    </td>
+                </tr>
+                <table>
+      
+            _END;
+      }
+$conn->close();
+?>

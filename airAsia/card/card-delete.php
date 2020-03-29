@@ -1,23 +1,25 @@
 <?php
-    require_once  '../model/db_connect.php';
 
-	$conn = new mysqli($hn, $un, $pw, $db);
-	if($conn->connect_error) die($conn->connect_error);
+//reference login.php info
+require_once '../model/db_connect.php';
 
-	if(isset($_POST['cardid'])) {
-		$cardId = $_POST['cardid'];
+//connect
+$conn = new mysqli ($hn, $un, $pw, $db);
+if($conn->connect_error) die($conn->connect_error);
 
-		$query = "DELETE FROM giftcard WHERE cardId = $cardId";
-		
-		$result = $conn->query($query); 
-		if(!$result){ 
-			die($conn->error);
-		 }else{
-			echo 'success';
-		}
-		
-		header("Location: ./card-list.php");
-	}
+if(isset($_POST['delete'])){
 
-	$conn->close();
+    $cardId = $_POST['cardId'];
+    $query = "delete from giftcard where cardId='$cardId' ";
+
+    
+    $result = $conn->query($query);
+    if (!$result) die($conn->error);
+    
+      header("Location: card-list.php");
+    }
+
+
+$conn->close();
+
 ?>
