@@ -11,6 +11,9 @@
 					<br>
 					</center>
 				</a>
+                <br>
+                <br>
+                <a href="../logout.php">Logout</a>
 			</body>
 </html>
 
@@ -58,7 +61,6 @@
                     </form>	
                 </pre>
             </center>
-            
         _END;
         }
     }

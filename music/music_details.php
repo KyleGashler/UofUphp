@@ -69,7 +69,9 @@ echo <<<_END
 		</form>
 	
 	</center>
-	
+	<br>
+	<br>
+	<a href="../logout.php">Logout</a>
 	
 _END;
 

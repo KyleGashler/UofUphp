@@ -16,6 +16,9 @@
 					<br>
 					</center>
 				</a>
+                <br>
+                <br>
+                <a href="../logout.php">Logout</a>
 			</body>
 </html>
 
@@ -48,7 +51,7 @@
                     Title: <input type='submit' value='$row[1]'>
                     <img height='150' width='150' src='$row[6]'></img>
                 </form>
-            </pre>    
+            </pre>          
         _END;
     }
 ?>

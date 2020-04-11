@@ -12,6 +12,9 @@
             </center>
         </a>
     </body>
+    <br>
+    <br>
+    <a href="../logout.php">Logout</a>
 </html>
 
 <?php
@@ -65,6 +68,7 @@
                         <input type="submit" value="delete book">
                     </form>
             </center>
+
         _END;
     }
     $conn->close();

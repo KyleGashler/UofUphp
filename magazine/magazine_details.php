@@ -11,6 +11,9 @@
 					<br>
 					</center>
 				</a>
+                <br>
+                <br>
+                <a href="../logout.php">Logout</a>
 			</body>
 </html>
 
@@ -69,7 +72,6 @@ echo <<<_END
 		</form>
 	
 	</center>
-	
 	
 _END;
 

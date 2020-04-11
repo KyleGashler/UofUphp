@@ -11,6 +11,9 @@
 					<br>
 					</center>
 				</a>
+                <br>
+                <br>
+                <a href="../logout.php">Logout</a>
 			</body>
 </html>
 
@@ -43,24 +46,22 @@ if(isset($_POST['update'])){
 		$result->data_seek($j);
 		$row = $result->fetch_array(MYSQLI_NUM);
 	
-echo <<<_END
-	<center>
-	<pre>
-	<form method='post' action='music_update.php'>
-		Artist: <input type='text' name='artistName' value='$row[1]'>
-		Album: <input type='text' name='albumName' value='$row[2]'>
-		Genre: <input type='text' name='genre' value='$row[3]'>
-		Year Released: <input type='text' name='releaseYear' value='$row[4]'>
-		Image Link: <input type='text' name='imageLink' value='$row[5]'>
-		<input type='hidden' name='musicid' value='$row[0]'>
-		<input type='hidden' name='update2' value='yes'>
-		<input type='submit'>
-	</form>	
-	</pre>
-	</center>
-	
-_END;
-	
+        echo <<<_END
+            <center>
+            <pre>
+            <form method='post' action='music_update.php'>
+                Artist: <input type='text' name='artistName' value='$row[1]'>
+                Album: <input type='text' name='albumName' value='$row[2]'>
+                Genre: <input type='text' name='genre' value='$row[3]'>
+                Year Released: <input type='text' name='releaseYear' value='$row[4]'>
+                Image Link: <input type='text' name='imageLink' value='$row[5]'>
+                <input type='hidden' name='musicid' value='$row[0]'>
+                <input type='hidden' name='update2' value='yes'>
+                <input type='submit'>
+            </form>	
+            </pre>
+            </center>
+        _END;
 	}
 }
 

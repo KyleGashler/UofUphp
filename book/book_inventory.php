@@ -15,6 +15,9 @@
             </center>
         </a>
     </body>
+    <br>
+    <br>
+    <a href="../logout.php">Logout</a>
 </html>
 
 <?php

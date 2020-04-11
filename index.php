@@ -57,6 +57,9 @@ echo <<<_END
 				</div>
 				<br>
 			</div>
+			<br>
+			<br>
+			<a href="./logout.php">Logout</a>
 		</body>
 	</html>
 _END;
