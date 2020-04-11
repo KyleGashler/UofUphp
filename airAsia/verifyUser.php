@@ -28,7 +28,7 @@ if(isset($_POST['username'])){
     if($passwordMatch == true ){
         // start session
         session_start();//this must be called anywhere you want to use a session
-        $_SESSION['username'] = 'KYLE BEANS';
+        $_SESSION['username'] = $userName;
 
         header('Location: ./index.php');
     }
