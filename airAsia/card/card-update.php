@@ -4,7 +4,7 @@ if($_SESSION['username'])//if the username is NOT in session
 {
     echo 'welcome ' . $_SESSION['username'];
 }else {
-    header("Location: loginscreen.php");
+    header("Location: ../loginscreen.php");
 }
 ?>
 <html>
