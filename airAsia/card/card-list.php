@@ -1,7 +1,16 @@
+<?php
+session_start();
+if($_SESSION['username'])//if the username is NOT in session
+{
+    echo 'welcome ' . $_SESSION['username'];
+}else {
+    header("Location: loginscreen.php");
+}
+?>
 <html>
 	<head>
 		<title>AirAsia</title>
-        <link rel="stylesheet" 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <link 		rel="stylesheet" href="styles.css" > 
+        <link rel="stylesheet" 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> <link 		rel="stylesheet" href="../styles.css" > 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 		
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
@@ -12,7 +21,8 @@
 		  <div class="container">
 			<div class="collapse navbar-collapse" id="myNavbar">
 			  <ul class="nav navbar-nav navbar-right">
-				<li><a href="./card-add.php">Add New Card</a></li>
+				<li><a href="../index.php">Home</a></li>
+                <li><a href="./card-add.php">Add New Card</a></li>
 				<li><a href="./card-list.php">Gift Cards</a></li>
 			  </ul>
 			</div>
@@ -45,14 +55,13 @@ if ($conn->connect_error) die ($conn->connect_error);
         
                 
         echo <<<_END
-
             <table>
                 <tr>
                     <td>
-                    <img src="/AirAsia/images/giftcard1.jpeg">
+                    <img src="../images/giftcard1.jpeg">
                     <pre>
                     ID: $row[0]
-                    Card Name:<a href='card-details.php?id=$row[0]'>$row[1]</a>
+                    Card Name:<a href='./card-details.php?id=$row[0]'>$row[1]</a>
                     Card Type:$row[2]
                     Card Value:$row[3]
                     Points:$row[4]
@@ -66,7 +75,6 @@ if ($conn->connect_error) die ($conn->connect_error);
                     </td>
                 </tr>
                 <table>
-      
             _END;
       }
 $conn->close();
