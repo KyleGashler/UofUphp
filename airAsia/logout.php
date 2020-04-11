@@ -10,7 +10,7 @@
     }
     echo <<<_END
         <a href="./login.php">
-           <img height='100' width='200' src='./images/library_logo.jpg'>
+           Log Back In
         </a>
         _END;
 

@@ -15,7 +15,10 @@ if($_SESSION['username'])//if the username is NOT in session
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<h1></h1>
+    <a href="../logout.php">Logout</a>
+    <br>
+    <br>
+		<h1>Add Card</h1>
 		
 <!-- Navbar -->
       
@@ -54,6 +57,7 @@ if($_SESSION['username'])//if the username is NOT in session
 			<input type='submit' value='OK'>
 		</form>
   </detail>
+    
 </section>
 
 <?php

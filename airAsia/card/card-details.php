@@ -15,6 +15,9 @@ if($_SESSION['username'])//if the username is NOT in session
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<body>
+    <a href="../logout.php">Logout</a>
+    <br>
+    <br>
 		<h1>Card Detail</h1>
 <!-- Navbar -->
 	<nav class="navbar navbar-default">
