@@ -12,7 +12,7 @@
 				<a>
 					<br>
 					<center>
-					<img height='100' width='200' src='../images/library_logo.jpg'></img>
+					<a href="../index.php"><img height='100' width='200' src='../images/library_logo.jpg'></img></a>
 					<br>
 					</center>
 				</a>
@@ -28,6 +28,9 @@
 session_start();
 if (isset($_SESSION['username'])) {
     echo 'welcome ' . $_SESSION['username'];
+    if (isset($_SESSION['checkout'])){
+        echo '<br>' . 'you checked out ' . $_SESSION['checkout'];
+    }
 } else {
     header("Location: ../login.php");
 }
@@ -51,6 +54,7 @@ if (isset($_SESSION['username'])) {
                 <form method="post" action ="movie_details.php">
                     <input type ='hidden' name ='movieid' value='$row[0]'>
                     Title: <input type='submit' value='$row[1]'>
+                    Copies Available: $row[6]
                     <img height='150' width='150' src='$row[5]'></img>
                 </form>   
             </pre>

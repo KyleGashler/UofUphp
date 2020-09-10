@@ -12,7 +12,7 @@
 				<a>
 					<br>
 					<center>
-					<img height='100' width='200' src='..//images/library_logo.jpg'></img>
+					<a href="http://localhost/library-master/home.php"><img height='100' width='200' src='../images/library_logo.jpg'></img></a>
 					<br>
 					</center>
 				</a>
@@ -28,6 +28,9 @@
     session_start();
     if (isset($_SESSION['username'])) {
         echo 'welcome ' . $_SESSION['username'];
+        if (isset($_SESSION['checkout'])){
+            echo '<br>' . 'you checked out ' . $_SESSION['checkout'];
+        }
     } else {
         header("Location: ../login.php");
     }
@@ -49,6 +52,7 @@
                 <form method="post" action ="magazine_details.php">
                     <input type ='hidden' name ='magazineid' value='$row[0]'>
                     Title: <input type='submit' value='$row[1]'>
+                    Copies Available: $row[7]
                     <img height='150' width='150' src='$row[6]'></img>
                 </form>
             </pre>          

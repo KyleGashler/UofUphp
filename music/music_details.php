@@ -7,7 +7,7 @@
 				<a>
 					<br>
 					<center>
-					<img height='100' width='200' src='../images/library_logo.jpg'></img>
+					<a href="http://localhost/library-master/home.php"><img height='100' width='200' src='../images/library_logo.jpg'></img></a>
 					<br>
 					</center>
 				</a>
@@ -20,6 +20,9 @@
 session_start();
 if (isset($_SESSION['username'])) {
     echo 'welcome ' . $_SESSION['username'];
+    if (isset($_SESSION['checkout'])){
+        echo '<br>' . 'you checked out ' . $_SESSION['checkout'];
+    }
 } else {
     header("Location: ../login.php");
 }
@@ -51,21 +54,28 @@ echo <<<_END
 	Album: $row[2]
 	Genre: $row[3]
 	Year Released: $row[4]
+	Copies Available: $row[6]
 	
 	</pre>
 	</center>
 	
 	<center>
+		<form method="post" action ="checkout.php">
+			<input type='hidden' name = 'checkout' value = '1'>
+			<input type ='hidden' name ='musicId' value='$row[0]'>
+			<input type ='hidden' name = 'copiesavailable' value='$row[6]'>
+			<input type="submit" value="Checkout Music">
+		</form>	
 		<form method="post" action ="music_update.php">
 			<input type='hidden' name = 'update' value = 'yes'>
 			<input type ='hidden' name ='musicid' value='$row[0]'>
-			<input type="submit" value="update music">
+			<input type="submit" value="Update Music">
 		</form>	
 	
 		<form method="post" action ="music_delete.php">
 			<input type='hidden' name = 'delete' value = 'yes'>
 			<input type ='hidden' name ='musicid' value='$row[0]'>
-			<input type="submit" value="delete music">
+			<input type="submit" value="Delete Music">
 		</form>
 	
 	</center>

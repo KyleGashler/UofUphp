@@ -7,7 +7,7 @@
         <a>
             <br>
             <center>
-            <img height='100' width='200' src='../images/library_logo.jpg'></img>
+            <a href="http://localhost/library-master/home.php"><img height='100' width='200' src='../images/library_logo.jpg'></img></a>
             <br>
             </center>
         </a>
@@ -23,6 +23,9 @@
     session_start();
     if (isset($_SESSION['username'])) {
         echo 'welcome ' . $_SESSION['username'];
+        if (isset($_SESSION['checkout'])){
+            echo '<br>' . 'you checked out ' . $_SESSION['checkout'];
+        }
     } else {
         header("Location: ../login.php");
     }
@@ -54,18 +57,26 @@
                     Author: $row[2]
                     Genre: $row[3]
                     Year Published: $row[4]
+                    Copies Available: $row[6]
                 </pre>
                 </center>
                 <center>
+                    <form method="post" action ="checkout.php">
+                        <input type='hidden' name = 'checkout' value = '1'>
+                        <input type ='hidden' name ='bookId' value='$row[0]'>
+                        <input type ='hidden' name ='copiesavailable' value='$row[6]'>
+                        <input type ='hidden' name = 'name' value='$row[1]'>
+                        <input type="submit" value="Checkout Book">
+                    </form>	
                     <form method="post" action ="book_update.php">
                         <input type='hidden' name = 'update' value = 'yes'>
                         <input type ='hidden' name ='bookid' value='$row[0]'>
-                        <input type="submit" value="update book">
+                        <input type="submit" value="Update Book">
                     </form>	
                     <form method="post" action ="book_delete.php">
                         <input type='hidden' name = 'delete' value = 'yes'>
                         <input type ='hidden' name ='bookid' value='$row[0]'>
-                        <input type="submit" value="delete book">
+                        <input type="submit" value="Delete Book">
                     </form>
             </center>
 

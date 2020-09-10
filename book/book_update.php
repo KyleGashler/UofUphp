@@ -7,7 +7,7 @@
         <a>
             <br>
             <center>
-            <img height='100' width='200' src='../images/library_logo.jpg'></img>
+            <a href="http://localhost/library-master/home.php"><img height='100' width='200' src='../images/library_logo.jpg'></img></a>
             <br>
             </center>
         </a>
@@ -23,6 +23,9 @@
     session_start();
     if (isset($_SESSION['username'])) {
         echo 'welcome ' . $_SESSION['username'];
+        if (isset($_SESSION['checkout'])){
+            echo '<br>' . 'you checked out ' . $_SESSION['checkout'];
+        }
     } else {
         header("Location: ../login.php");
     }
@@ -54,6 +57,7 @@
                             Genre: <input type='text' name='genre' value='$row[3]'>
                             Year Published: <input type='text' name='publishYear' value='$row[4]'>
                             Image Link: <input type='text' name='imageLink' value='$row[5]'>
+                            Copies Available: <input type='text' name='copiesavailable' value='$row[6]'>
                             <input type='hidden' name='bookid' value='$row[0]'>
                             <input type='hidden' name='update2' value='yes'>
                             <input type='submit'>
@@ -72,8 +76,9 @@
         $genre = $_POST['genre'];
         $publishYear = $_POST['publishYear'];
         $imageLink = $_POST['imageLink'];
+        $copiesavailable=$_POST['copiesavailable'];
 
-        $query = "UPDATE books set bookName='$bookName', author='$author', genre='$genre', publishYear='$publishYear', imageLink='$imageLink' where bookid=$bookid ";
+        $query = "UPDATE books set check_out_flg='$copiesavailable',bookName='$bookName', author='$author', genre='$genre', publishYear='$publishYear', imageLink='$imageLink' where bookid=$bookid ";
 
         $result = $conn->query($query);
         if(!$result) die($conn->error);

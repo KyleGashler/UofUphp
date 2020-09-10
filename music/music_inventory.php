@@ -12,7 +12,7 @@
         <a>
             <br>
             <center>
-            <img height='100' width='200' src='../images/library_logo.jpg'></img>
+            <a href="../index.php"><img height='100' width='200' src='../images/library_logo.jpg'></img></a>
             <br>
             </center>
         </a>
@@ -28,7 +28,9 @@
     session_start();
     if (isset($_SESSION['username'])) {
         echo 'welcome ' . $_SESSION['username'];
-    } else {
+        if (isset($_SESSION['checkout'])){
+            echo '<br>' . 'you checked out ' . $_SESSION['checkout'];
+        }
         header("Location: ../login.php");
     }
 
@@ -51,6 +53,7 @@
         <form method="post" action ="music_details.php">
             <input type ='hidden' name ='musicid' value='$row[0]'>
             Artist: <input type='submit' value='$row[1]'>
+            Copies Available: $row[6]
             <img height='150' width='150' src='$row[5]'></img>
         </form>
                 

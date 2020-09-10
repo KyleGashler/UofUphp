@@ -7,7 +7,7 @@
 				<a>
 					<br>
 					<center>
-					<img height='100' width='200' src='../images/library_logo.jpg'></img>
+					<a href="http://localhost/library-master/home.php"><img height='100' width='200' src='../images/library_logo.jpg'></img></a>
 					<br>
 					</center>
 				</a>
@@ -23,6 +23,9 @@
     session_start();
     if (isset($_SESSION['username'])) {
         echo 'welcome ' . $_SESSION['username'];
+        if (isset($_SESSION['checkout'])){
+            echo '<br>' . 'you checked out ' . $_SESSION['checkout'];
+        }
     } else {
         header("Location: ../login.php");
     }
@@ -55,6 +58,7 @@
                         Year Published: <input type='text' name='publishYear' value='$row[4]'>
                         Issue Number: <input type='text' name='issueNumber' value='$row[5]'>
                         Image Link: <input type='text' name='imageLink' value='$row[6]'>
+                        Copies Available: <input type='text' name='copiesavailable' value='$row[7]'>
                         <input type='hidden' name='magazineid' value='$row[0]'>
                         <input type='hidden' name='update2' value='yes'>
                         <input type='submit'>
@@ -74,8 +78,9 @@
         $publishYear = $_POST['publishYear'];
         $issueNumber = $_POST['issueNumber'];
         $imageLink = $_POST['imageLink'];
+        $copiesavailable=$_POST['copiesavailable'];
 
-        $query = "UPDATE magazines set magazineName='$magazineName', topic='$topic', publisher='$publisher', publishYear='$publishYear', issueNumber='$issueNumber', imageLink='$imageLink' where magazineid=$magazineid ";
+        $query = "UPDATE magazines set check_out_flg='$copiesavailable',magazineName='$magazineName', topic='$topic', publisher='$publisher', publishYear='$publishYear', issueNumber='$issueNumber', imageLink='$imageLink' where magazineid=$magazineid ";
 
         $result = $conn->query($query);
         if(!$result) die($conn->error);

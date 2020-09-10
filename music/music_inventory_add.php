@@ -33,6 +33,9 @@
 session_start();
 if (isset($_SESSION['username'])) {
     echo 'welcome ' . $_SESSION['username'];
+    if (isset($_SESSION['checkout'])){
+        echo '<br>' . 'you checked out ' . $_SESSION['checkout'];
+    }
 } else {
     header("Location: ../login.php");
 }

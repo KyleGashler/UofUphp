@@ -7,7 +7,7 @@
 				<a>
 					<br>
 					<center>
-					<img height='100' width='200' src='../images/library_logo.jpg'></img>
+					<a href="../index.php"><img height='100' width='200' src='../images/library_logo.jpg'></img></a>
 					<br>
 					</center>
 				</a>
@@ -32,9 +32,9 @@ if($conn->connect_error) die($conn->connect_error);
 
 if(isset($_POST['update'])){
 	
-	$movieid = $_POST['movieid'];
+	$movieid = $_POST['movieId'];
 	
-	$query = "SELECT * FROM movies where movieid=$movieid ";
+	$query = "SELECT * FROM movies where movieId=$movieid ";
 	
 	$result = $conn->query($query);
 	if(!$result) die($conn->error);
@@ -49,11 +49,12 @@ echo <<<_END
 	<center>
         <pre>
             <form method='post' action='movie_update.php'>
-                Title: <input type='text' name='movieName' value='$row[1]'>
+				Title: <input type='text' name='movieName' value='$row[1]'>
                 Genre: <input type='text' name='genre' value='$row[2]'>
                 Director: <input type='text' name='director' value='$row[3]'>
                 Year Released: <input type='text' name='releaseYear' value='$row[4]'>
-                Image Link: <input type='text' name='imageLink' value='$row[5]'>
+				Image Link: <input type='text' name='imageLink' value='$row[5]'>
+				Copies Available: <input type='text' name='copiesavailable' value='$row[6]'>
                 <input type='hidden' name='movieid' value='$row[0]'>
                 <input type='hidden' name='update2' value='yes'>
                 <input type='submit'>
@@ -73,8 +74,9 @@ if(isset($_POST['update2'])){
 	$director = $_POST['director'];
 	$releaseYear = $_POST['releaseYear'];
 	$imageLink = $_POST['imageLink'];
+	$copiesavailable=$_POST['copiesavailable'];
 	
-	$query = "UPDATE movies set movieName='$movieName', genre='$genre', director='$director', releaseYear='$releaseYear', imageLink='$imageLink' where movieid=$movieid ";
+	$query = "UPDATE movies set check_out_flg='$copiesavailable', movieName='$movieName', genre='$genre', director='$director', releaseYear='$releaseYear', imageLink='$imageLink' where movieid=$movieid ";
 	
 	$result = $conn->query($query);
 	if(!$result) die($conn->error);

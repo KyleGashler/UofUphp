@@ -7,7 +7,7 @@
 				<a>
 					<br>
 					<center>
-					<img height='100' width='200' src='../images/library_logo.jpg'></img>
+					<a href="http://localhost/library-master/home.php"><img height='100' width='200' src='../images/library_logo.jpg'></img></a>
 					<br>
 					</center>
 				</a>
@@ -24,6 +24,9 @@
 session_start();
 if (isset($_SESSION['username'])) {
     echo 'welcome ' . $_SESSION['username'];
+    if (isset($_SESSION['checkout'])){
+        echo '<br>' . 'you checked out ' . $_SESSION['checkout'];
+    }
 } else {
     header("Location: ../login.php");
 }
@@ -55,6 +58,7 @@ if(isset($_POST['update'])){
                 Genre: <input type='text' name='genre' value='$row[3]'>
                 Year Released: <input type='text' name='releaseYear' value='$row[4]'>
                 Image Link: <input type='text' name='imageLink' value='$row[5]'>
+                Copies Available: <input type='text' name='copiesavailable' value='$row[6]'>
                 <input type='hidden' name='musicid' value='$row[0]'>
                 <input type='hidden' name='update2' value='yes'>
                 <input type='submit'>
@@ -73,8 +77,9 @@ if(isset($_POST['update2'])){
 	$genre = $_POST['genre'];
 	$releaseYear = $_POST['releaseYear'];
 	$imageLink = $_POST['imageLink'];
+	$copiesavailable=$_POST['copiesavailable'];
 	
-	$query = "UPDATE music set artistName='$artistName', albumName='$albumName', genre='$genre', releaseYear='$releaseYear', imageLink='$imageLink' where musicid=$musicid ";
+	$query = "UPDATE music set check_out_flg='$copiesavailable',artistName='$artistName', albumName='$albumName', genre='$genre', releaseYear='$releaseYear', imageLink='$imageLink' where musicid=$musicid ";
 	
 	$result = $conn->query($query);
 	if(!$result) die($conn->error);

@@ -7,7 +7,7 @@
 				<a>
 					<br>
 					<center>
-					<img height='100' width='200' src='../images/library_logo.jpg'></img>
+					<a href="http://localhost/library-master/home.php"><img height='100' width='200' src='../images/library_logo.jpg'></img></a>
 					<br>
 					</center>
 				</a>
@@ -23,6 +23,9 @@
 session_start();
 if (isset($_SESSION['username'])) {
     echo 'welcome ' . $_SESSION['username'];
+    if (isset($_SESSION['checkout'])){
+        echo '<br>' . 'you checked out ' . $_SESSION['checkout'];
+    }
 } else {
     header("Location: ../login.php");
 }
@@ -54,21 +57,28 @@ echo <<<_END
 	Publisher: $row[3]
 	Year Published: $row[4]
 	Issue Number: $row[5]
+	Copies Available: $row[7]
 		
 	</pre>
 	</center>
 	
 	<center>
+		<form method="post" action ="checkout.php">
+			<input type='hidden' name = 'checkout' value = '1'>
+			<input type ='hidden' name ='magazineId' value='$row[0]'>
+			<input type ='hidden' name = 'copiesavailable' value='$row[7]'>
+			<input type ='hidden' name = 'name' value='$row[1]'>
+			<input type="submit" value="Checkout Magazine">
+		</form>	
 		<form method="post" action ="magazine_update.php">
 			<input type='hidden' name = 'update' value = 'yes'>
 			<input type ='hidden' name ='magazineid' value='$row[0]'>
-			<input type="submit" value="update magazine">
+			<input type="submit" value="Update magazine">
 		</form>	
-	
 		<form method="post" action ="magazine_delete.php">
 			<input type='hidden' name = 'delete' value = 'yes'>
 			<input type ='hidden' name ='magazineid' value='$row[0]'>
-			<input type="submit" value="delete magazine">
+			<input type="submit" value="Delete magazine">
 		</form>
 	
 	</center>
